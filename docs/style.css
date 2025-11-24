@@ -1,0 +1,1132 @@
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --bg-gradient-start: #f8fafc;
+    --bg-gradient-end: #e2e8f0;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-main: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.dark-mode {
+    --primary: #818cf8;
+    --primary-hover: #6366f1;
+    --bg-gradient-start: #0f172a;
+    --bg-gradient-end: #1e293b;
+    --card-bg: rgba(30, 41, 59, 0.8);
+    --text-main: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border: #334155;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    background: linear-gradient(to right, var(--primary), #ec4899);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.left-panel,
+.right-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: var(--glass-border);
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s;
+    margin-top: 0.5rem;
+}
+
+button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Gantt Chart */
+.gantt-section {
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Standardize Gantt chart block size */
+.gantt-block {
+    flex: 0 0 80px;
+    /* Wider gantt blocks */
+    min-height: 50px;
+    padding: 6px 3px;
+    border: 1px solid var(--border-color);
+    margin-right: 4px;
+    text-align: center;
+    position: relative;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gantt-block:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
+
+.gantt-block.idle {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.dark-mode .gantt-block.idle {
+    background-color: var(--idle-color);
+    color: #cbd5e1;
+}
+
+/* Updated Theme Switch Styles */
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    /* Changed from left: 50% */
+    transform: none;
+    /* Removed translateX */
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    background: var(--panel-bg);
+    padding: 5px;
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Remove the old style */
+.theme-switch-wrapper em {
+    display: none;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #374151;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.4s;
+    border-radius: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 26px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.slider svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2px;
+    z-index: 1;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+}
+
+.sun {
+    color: #fbbf24;
+    transform-origin: center;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.3));
+}
+
+.moon {
+    color: #e2e8f0;
+    transform-origin: center;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 0 4px rgba(226, 232, 240, 0.3));
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+input:checked+.slider .sun {
+    transform: scale(0.3);
+}
+
+input:checked+.slider .moon {
+    transform: scale(1);
+}
+
+input:not(:checked)+.slider .sun {
+    transform: scale(1);
+}
+
+input:not(:checked)+.slider .moon {
+    transform: scale(0.3);
+}
+
+.slider.round {
+    border-radius: 34px;
+    overflow: hidden;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Remove mode-text related styles */
+.mode-text {
+    display: none;
+}
+
+/* Remove the old dark mode toggle button styles */
+#darkModeToggle {
+    display: none;
+}
+
+.algorithm-select {
+    margin-bottom: 20px;
+}
+
+.algorithm-select select {
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.algorithm-select select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.2);
+    outline: none;
+}
+
+.dark-mode .algorithm-select select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-color: var(--input-border);
+}
+
+#timeQuantumInput {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#timeQuantumInput input,
+#priority {
+    padding: 4px;
+    margin-right: 10px;
+    width: 100px;
+}
+
+/* Make the process table fit the left panel */
+.process-list table {
+    font-size: 0.9em;
+}
+
+/* Make the Gantt chart more prominent */
+#ganttChart {
+    min-height: 100px;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.results {
+    margin-top: auto;
+    background: var(--panel-bg);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.input-group {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: var(--text-color);
+}
+
+.input-group input {
+    width: 100px;
+}
+
+.input-group textarea {
+    width: 100%;
+    padding: 4px;
+    font-family: 'Inter', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    resize: none;
+    height: 24px;
+    overflow: hidden;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+}
+
+.input-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.2);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.input-group input:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+    transform: translateY(-1px);
+}
+
+.process-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    flex: 1;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.mode-indicator {
+    display: none;
+}
+
+.averages {
+    font-size: 0.8rem;
+    margin-top: 15px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.averages p {
+    margin: 8px 0;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.visualization {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gantt-chart,
+.results {
+    margin: 0;
+}
+
+/* Multi-row Gantt Styles */
+.gantt-chart.multi-row,
+#ganttChartLive.multi-row {
+    display: block;
+    /* Override flex */
+    height: auto;
+    overflow-y: auto;
+}
+
+.gantt-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.gantt-row-label {
+    width: 80px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-right: 10px;
+}
+
+.gantt-row-bars {
+    display: flex;
+    flex-grow: 1;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gantt-block.gap {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.algorithm-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+
+.algorithm-name span {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+#currentAlgorithm {
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 2px 6px;
+    background: var(--bg-color);
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.gantt-section {
+    background: var(--panel-bg);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+}
+
+.gantt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.gantt-header h2 {
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+/* Remove old algorithm-name styles */
+.algorithm-name {
+    background: none;
+    box-shadow: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.averages-table {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--panel-bg);
+}
+
+.averages-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 6px;
+}
+
+.averages-table td {
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 0.75rem;
+}
+
+.averages-table td:first-child {
+    font-weight: 500;
+}
+
+.averages-table td:last-child {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Add this new style for the calculate button container */
+.calculate-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Update GitHub logo styles */
+.github-logo {
+    position: fixed;
+    /* Change from absolute to fixed */
+    bottom: 20px;
+    /* Change from top to bottom */
+    right: 20px;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+    /* Ensure it stays on top */
+}
+
+.github-logo:hover {
+    opacity: 0.8;
+}
+
+.github-logo img {
+    width: 50px;
+    /* Updated from 24px */
+    height: 50px;
+    /* Updated from 24px */
+    border-radius: 50%;
+}
+
+/* Add responsive styles */
+@media screen and (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .container {
+        padding: 10px;
+        margin-top: 50px;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    .theme-switch-wrapper {
+        top: 10px;
+        right: 20px;
+        /* Adjusted right padding for mobile */
+    }
+
+    .github-logo {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .github-logo img {
+        width: 40px;
+        /* Updated from 20px for better visibility on mobile */
+        height: 40px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.75rem;
+        min-width: 100px;
+    }
+
+    .input-group textarea {
+        font-size: 0.75rem;
+        padding: 6px;
+    }
+
+    .averages-table {
+        max-width: 100%;
+    }
+
+    .gantt-block {
+        flex: 0 0 50px;
+        min-height: 40px;
+        font-size: 0.7rem;
+    }
+
+    .results {
+        padding: 15px;
+    }
+
+    table {
+        font-size: 0.75rem;
+    }
+
+    th,
+    td {
+        padding: 4px;
+    }
+
+    .mode-indicator {
+        display: none;
+    }
+}
+
+/* Add smaller screen optimizations */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 1.1rem;
+        margin-top: 50px;
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 10px;
+    }
+
+    .gantt-block {
+        flex: 0 0 40px;
+        min-height: 35px;
+        font-size: 0.65rem;
+        padding: 4px 2px;
+    }
+
+    .algorithm-select select {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .input-group label {
+        font-size: 0.7rem;
+    }
+
+    .calculate-button-container button,
+    .process-inputs button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .gantt-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    #currentAlgorithm {
+        font-size: 0.7rem;
+    }
+
+    .github-logo {
+        bottom: 12px;
+        right: 12px;
+    }
+
+    .github-logo img {
+        width: 35px;
+        /* Updated from 18px for better visibility on smaller screens */
+        height: 35px;
+    }
+
+    .theme-switch-wrapper {
+        top: 8px;
+        right: 15px;
+        /* Further adjusted for smaller screens */
+    }
+}
+
+/* Add this new style for the calculate button container */
+.calculate-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Add styles for screen-reader-only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Real-time Visualization Styles */
+#liveVisualization {
+    margin-top: 2rem;
+    border-top: 2px solid #ddd;
+    padding-top: 1.5rem;
+}
+
+#ganttChartLive {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    min-height: 60px;
+}
+
+.gantt-block-live {
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    color: white;
+    font-weight: bold;
+}
+
+.gantt-block-live.idle {
+    background: #95a5a6 !important;
+}
+
+#simulationControls {
+    margin: 1rem 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.speed-control label {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.speed-control input[type="range"] {
+    width: 100px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+}
+
+.speed-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.speed-control input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+}
+
+#speedLabel {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    min-width: 30px;
+}
+
+.step-reason {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    border-left: 3px solid var(--primary-color);
+    min-height: 20px;
+}
+
+.live-process-table {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.live-process-table h4 {
+    margin: 0 0 10px 0;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.live-process-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.live-process-table thead {
+    display: table-header-group !important;
+    visibility: visible !important;
+}
+
+.live-process-table thead tr {
+    display: table-row !important;
+    visibility: visible !important;
+}
+
+#liveProcessTable table thead tr th,
+.live-process-table table thead tr th,
+.live-process-table th {
+    display: table-cell !important;
+    visibility: visible !important;
+    background: #6366f1 !important;
+    color: #ffffff !important;
+    padding: 10px 8px !important;
+    text-align: left !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    height: auto !important;
+    min-height: 30px !important;
+    opacity: 1 !important;
+}
+
+.live-process-table td {
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
+
+.live-process-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.live-process-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.process-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.state-running {
+    background: #10b981;
+    color: white;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.state-ready {
+    background: #f59e0b;
+    color: white;
+}
+
+.state-waiting {
+    background: #6b7280;
+    color: white;
+}
+
+.state-completed {
+    background: #3b82f6;
+    color: white;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+#liveMetrics {
+    display: none;
+    margin-top: 1rem;
+}
+
+/* .live-metric {
+    display: inline-block;
+    margin-right: 2rem;
+    padding: 0.5rem 1rem;
+    background: #ecf0f1;
+    border-radius: 4px;
+} */
+
+.live-metric span {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+#pauseBtn.paused {
+    background-color: #ff4444;
+}
+
+#timeCounter {
+    font-size: 1.2em;
+    margin: 10px 0;
+    padding: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+#timeCounter span {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.dark-mode #timeCounter {
+    background: #34495e;
+}
+
+.dark-mode .time-label {
+    color: #95a5a6;
+}
+
+/* Add loading animation for calculations */
+@keyframes calculate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.calculating {
+    position: relative;
+    pointer-events: none;
+}
+
+.calculating::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: calculate 0.8s linear infinite;
+}
+
+/* Improved scrollbar for dark mode */
+.dark-mode ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+    background: var(--panel-bg);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
